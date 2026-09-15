@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asif Ramzan | React/Next.js Developer</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #e5e7eb;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #6c63ff;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a52d5;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-dark {
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #6c63ff, #a78bfa, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-secondary {
+            background: linear-gradient(135deg, #f472b6, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glow effect */
+        .glow {
+            box-shadow: 0 0 40px rgba(108, 99, 255, 0.15);
+        }
+
+        .glow-hover:hover {
+            box-shadow: 0 0 60px rgba(108, 99, 255, 0.25);
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+
+        /* Skill pill */
+        .skill-pill {
+            background: rgba(108, 99, 255, 0.10);
+            border: 1px solid rgba(108, 99, 255, 0.15);
+            color: #c4b5fd;
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-pill:hover {
+            background: rgba(108, 99, 255, 0.20);
+            border-color: rgba(108, 99, 255, 0.35);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(108, 99, 255, 0.10);
+        }
+
+        /* Project card */
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 1.25rem;
+            padding: 1.75rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.05), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 1.25rem;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(108, 99, 255, 0.20);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Section title underline */
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-underline {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #6c63ff, #a78bfa);
+            border-radius: 10px;
+            margin-top: 0.5rem;
+        }
+
+        /* Nav link */
+        .nav-link {
+            position: relative;
+            color: #9ca3af;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 0.01em;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6c63ff, #a78bfa);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #e5e7eb;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Typing cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: #6c63ff;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Floating animation */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* Pulse ring */
+        .pulse-ring {
+            animation: pulseRing 2s ease-out infinite;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(108, 99, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(108, 99, 255, 0);
+            }
+        }
+
+        /* Timeline dot */
+        .timeline-dot {
+            width: 14px;
+            height: 14px;
+            background: #6c63ff;
+            border-radius: 50%;
+            border: 3px solid rgba(108, 99, 255, 0.2);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-line {
+            width: 2px;
+            background: rgba(108, 99, 255, 0.15);
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            transform: translateX(-50%);
+        }
+
+        /* Contact input */
+        .contact-input {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0.75rem;
+            padding: 0.9rem 1.25rem;
+            color: #e5e7eb;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .contact-input:focus {
+            outline: none;
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.10);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .contact-input::placeholder {
+            color: #6b7280;
+        }
+
+        /* Social icon */
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #9ca3af;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .social-icon:hover {
+            background: rgba(108, 99, 255, 0.15);
+            border-color: #6c63ff;
+            color: #e5e7eb;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(108, 99, 255, 0.15);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 10, 15, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem 1.5rem;
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu.open {
+            right: 0;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.75rem;
+            }
+            .skill-pill {
+                font-size: 0.75rem;
+                padding: 0.35rem 1rem;
+            }
+            .project-card {
+                padding: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .hero-name {
+                font-size: 2.25rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== OVERLAY ====== -->
+    <div id="mobileOverlay" class="mobile-overlay" onclick="closeMobileMenu()"></div>
+
+    <!-- ====== MOBILE MENU ====== -->
+    <div id="mobileMenu" class="mobile-menu">
+        <div class="flex justify-end">
+            <button onclick="closeMobileMenu()" class="text-gray-400 hover:text-white text-2xl transition">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex flex-col gap-5 mt-4">
+            <a href="#about" onclick="closeMobileMenu()" class="text-gray-300 hover:text-white text-lg font-medium transition">About</a>
+            <a href="#skills" onclick="closeMobileMenu()" class="text-gray-300 hover:text-white text-lg font-medium transition">Skills</a>
+            <a href="#experience" onclick="closeMobileMenu()" class="text-gray-300 hover:text-white text-lg font-medium transition">Experience</a>
+            <a href="#projects" onclick="closeMobileMenu()" class="text-gray-300 hover:text-white text-lg font-medium transition">Projects</a>
+            <a href="#contact" onclick="closeMobileMenu()" class="text-gray-300 hover:text-white text-lg font-medium transition">Contact</a>
+        </div>
+        <div class="mt-auto pt-6 border-t border-white/5">
+            <p class="text-gray-500 text-sm">📧 asiframzan7859@gmail.com</p>
+            <p class="text-gray-500 text-sm mt-1">📱 03260414827</p>
+        </div>
+    </div>
+
+    <!-- ====== NAVBAR ====== -->
+    <nav class="fixed top-0 left-0 w-full z-50 px-4 md:px-8 py-4 glass-dark">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="text-xl font-extrabold tracking-tight">
+                <span class="gradient-text">Asif</span>
+                <span class="text-white">.</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#6c63ff] to-[#8b5cf6] text-white font-semibold text-sm hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105">
+                    Hire Me
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button onclick="openMobileMenu()" class="md:hidden text-gray-300 hover:text-white text-2xl transition">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ====== HERO ====== -->
+    <section id="home" class="min-h-screen flex items-center relative overflow-hidden pt-20 px-4 md:px-8">
+        <!-- Background gradient orbs -->
+        <div class="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-purple-600/10 blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div>
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-purple-300 border border-purple-500/20 mb-6">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        Available for freelance & remote
+                    </div>
+
+                    <h1 class="hero-name text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                        Hi, I'm <br />
+                        <span class="gradient-text">Asif Ramzan</span>
+                    </h1>
+
+                    <div class="text-xl md:text-2xl text-gray-300 font-medium mt-3 flex items-center flex-wrap gap-1">
+                        <span>React</span>
+                        <span class="text-purple-400">/</span>
+                        <span>Next.js Developer</span>
+                        <span class="typing-cursor"></span>
+                    </div>
+
+                    <p class="text-gray-400 text-base md:text-lg max-w-lg mt-5 leading-relaxed">
+                        Building high-performance web applications with modern JavaScript frameworks.
+                        Passionate about clean code, pixel-perfect design, and seamless user experiences.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mt-8">
+                        <a href="#contact" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#6c63ff] to-[#8b5cf6] text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Get in Touch
+                        </a>
+                        <a href="#projects" class="px-8 py-3.5 rounded-full glass text-white font-semibold hover:bg-white/5 transition-all duration-300 border border-white/10 flex items-center gap-2">
+                            <i class="fas fa-code"></i> View Work
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-5 mt-8">
+                        <a href="https://github.com/Asif2021" target="_blank" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:asiframzan7859@gmail.com" class="social-icon">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/asif-ramzan-916a08132" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <span class="text-gray-500 text-sm ml-2">📍 Lahore, Pakistan</span>
+                    </div>
+                </div>
+
+                <!-- Right - Profile Card -->
+                <div class="flex justify-center md:justify-end">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-3xl glass glow flex items-center justify-center float">
+                            <div class="text-center">
+                                <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-purple-500/30 to-blue-500/30 flex items-center justify-center border-2 border-purple-500/30">
+                                    <span class="text-5xl font-extrabold gradient-text">AR</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mt-4">Asif Ramzan</h3>
+                                <p class="text-purple-300 text-sm">React/Next.js Dev</p>
+                                <div class="flex justify-center gap-2 mt-3">
+                                    <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                                    <span class="text-gray-400 text-xs">Open to work</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Floating badge -->
+                        <div class="absolute -bottom-4 -right-4 bg-gradient-to-r from-[#6c63ff] to-[#8b5cf6] px-4 py-2 rounded-full text-xs font-bold text-white shadow-lg shadow-purple-500/30 pulse-ring">
+                            <i class="fas fa-rocket mr-1"></i> 3+ Years
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ABOUT ====== -->
+    <section id="about" class="py-20 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="text-purple-400 text-sm font-semibold tracking-wider">ABOUT ME</span>
+                <span class="h-px flex-1 bg-gradient-to-r from-purple-500/30 to-transparent"></span>
+            </div>
+            <h2 class="section-title text-white">Know Me <span class="gradient-text">Better</span></h2>
+            <div class="section-underline"></div>
+
+            <div class="grid md:grid-cols-2 gap-12 mt-10">
+                <div>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        I'm <span class="text-white font-semibold">Asif Ramzan</span>, a passionate
+                        <span class="text-purple-300 font-semibold">React.js & Next.js Developer</span>
+                        with a strong foundation in full-stack web development.
+                    </p>
+                    <p class="text-gray-400 mt-4 leading-relaxed">
+                        Currently working at <span class="text-white font-medium">Meteoroite</span> since February 2023,
+                        I specialize in building modern, responsive, and high-performance web applications.
+                        My expertise spans across the entire frontend ecosystem — from crafting pixel-perfect UIs
+                        with Tailwind CSS and Shadcn UI to building scalable full-stack solutions with Next.js.
+                    </p>
+                    <p class="text-gray-400 mt-4 leading-relaxed">
+                        I hold a <span class="text-white font-medium">BS in Software Engineering</span> from
+                        Virtual University of Pakistan (2014-2018) and I'm fluent in
+                        <span class="text-white font-medium">English, Arabic, and Urdu</span>.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="glass p-4 rounded-xl text-center">
+                            <p class="text-2xl font-bold gradient-text">3+</p>
+                            <p class="text-gray-400 text-sm">Years Experience</p>
+                        </div>
+                        <div class="glass p-4 rounded-xl text-center">
+                            <p class="text-2xl font-bold gradient-text">10+</p>
+                            <p class="text-gray-400 text-sm">Projects Delivered</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass p-6 md:p-8 rounded-2xl border border-white/5">
+                    <h4 class="text-white font-semibold text-lg mb-4 flex items-center gap-2">
+                        <i class="fas fa-user text-purple-400"></i> Personal Details
+                    </h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between py-2 border-b border-white/5">
+                            <span class="text-gray-400">Full Name</span>
+                            <span class="text-white font-medium">Asif Ramzan</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-white/5">
+                            <span class="text-gray-400">Phone</span>
+                            <span class="text-white font-medium">0326 0414827</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-white/5">
+                            <span class="text-gray-400">Email</span>
+                            <span class="text-white font-medium break-all">asiframzan7859@gmail.com</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-white/5">
+                            <span class="text-gray-400">Location</span>
+                            <span class="text-white font-medium">Lahore, Pakistan</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-white/5">
+                            <span class="text-gray-400">Languages</span>
+                            <span class="text-white font-medium">🇬🇧 🇸🇦 🇵🇰</span>
+                        </div>
+                        <div class="flex justify-between py-2">
+                            <span class="text-gray-400">Freelance</span>
+                            <span class="text-green-400 font-medium">Available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== SKILLS ====== -->
+    <section id="skills" class="py-20 px-4 md:px-8 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="text-purple-400 text-sm font-semibold tracking-wider">EXPERTISE</span>
+                <span class="h-px flex-1 bg-gradient-to-r from-purple-500/30 to-transparent"></span>
+            </div>
+            <h2 class="section-title text-white">My <span class="gradient-text">Skills</span></h2>
+            <div class="section-underline"></div>
+
+            <div class="mt-10">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                    <span class="skill-pill text-center">HTML</span>
+                    <span class="skill-pill text-center">CSS</span>
+                    <span class="skill-pill text-center">JavaScript</span>
+                    <span class="skill-pill text-center">TypeScript</span>
+                    <span class="skill-pill text-center">React.js</span>
+                    <span class="skill-pill text-center">Next.js</span>
+                    <span class="skill-pill text-center">Tailwind CSS</span>
+                    <span class="skill-pill text-center">Bootstrap</span>
+                    <span class="skill-pill text-center">Shadcn UI</span>
+                    <span class="skill-pill text-center">Radix UI</span>
+                    <span class="skill-pill text-center">Material UI</span>
+                    <span class="skill-pill text-center">Ant Design</span>
+                </div>
+
+                <div class="mt-8 grid md:grid-cols-3 gap-6">
+                    <div class="glass p-6 rounded-xl border border-white/5">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+                            <i class="fas fa-code text-purple-400 text-xl"></i>
+                        </div>
+                        <h5 class="text-white font-semibold">Frontend</h5>
+                        <p class="text-gray-400 text-sm mt-1">React, Next.js, TypeScript, Tailwind, Bootstrap</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl border border-white/5">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+                            <i class="fas fa-paint-brush text-purple-400 text-xl"></i>
+                        </div>
+                        <h5 class="text-white font-semibold">UI/UX</h5>
+                        <p class="text-gray-400 text-sm mt-1">Shadcn, Radix, MUI, Ant Design, Responsive Design</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl border border-white/5">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+                            <i class="fas fa-server text-purple-400 text-xl"></i>
+                        </div>
+                        <h5 class="text-white font-semibold">Full Stack</h5>
+                        <p class="text-gray-400 text-sm mt-1">Next.js API Routes, Full-stack applications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== EXPERIENCE & EDUCATION ====== -->
+    <section id="experience" class="py-20 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="text-purple-400 text-sm font-semibold tracking-wider">JOURNEY</span>
+                <span class="h-px flex-1 bg-gradient-to-r from-purple-500/30 to-transparent"></span>
+            </div>
+            <h2 class="section-title text-white">Experience & <span class="gradient-text">Education</span></h2>
+            <div class="section-underline"></div>
+
+            <div class="grid md:grid-cols-2 gap-10 mt-10">
+                <!-- Experience -->
+                <div>
+                    <h4 class="text-white font-bold text-lg flex items-center gap-2 mb-6">
+                        <i class="fas fa-briefcase text-purple-400"></i> Work Experience
+                    </h4>
+                    <div class="relative pl-6 border-l-2 border-purple-500/20 space-y-8">
+                        <!-- Item 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-purple-500 border-2 border-purple-500/30"></div>
+                            <div class="glass p-5 rounded-xl border border-white/5">
+                                <div class="flex flex-wrap items-start justify-between gap-2">
+                                    <h5 class="text-white font-semibold text-lg">Web Developer</h5>
+                                    <span class="text-xs text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full">Feb 2023 – Present</span>
+                                </div>
+                                <p class="text-purple-300 text-sm font-medium">Meteoroite</p>
+                                <p class="text-gray-400 text-sm mt-2 leading-relaxed">
+                                    Building and maintaining web applications using React.js, Next.js, and modern UI libraries.
+                                    Collaborating with cross-functional teams to deliver high-quality software solutions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div>
+                    <h4 class="text-white font-bold text-lg flex items-center gap-2 mb-6">
+                        <i class="fas fa-graduation-cap text-purple-400"></i> Education
+                    </h4>
+                    <div class="relative pl-6 border-l-2 border-purple-500/20 space-y-8">
+                        <!-- Item 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-purple-500 border-2 border-purple-500/30"></div>
+                            <div class="glass p-5 rounded-xl border border-white/5">
+                                <div class="flex flex-wrap items-start justify-between gap-2">
+                                    <h5 class="text-white font-semibold text-lg">BS Software Engineering</h5>
+                                    <span class="text-xs text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full">2014 – 2018</span>
+                                </div>
+                                <p class="text-purple-300 text-sm font-medium">Virtual University of Pakistan</p>
+                                <p class="text-gray-400 text-sm mt-2 leading-relaxed">
+                                    Comprehensive degree covering software development, algorithms, data structures,
+                                    and modern programming paradigms.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== PROJECTS ====== -->
+    <section id="projects" class="py-20 px-4 md:px-8 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="text-purple-400 text-sm font-semibold tracking-wider">PORTFOLIO</span>
+                <span class="h-px flex-1 bg-gradient-to-r from-purple-500/30 to-transparent"></span>
+            </div>
+            <h2 class="section-title text-white">Featured <span class="gradient-text">Projects</span></h2>
+            <div class="section-underline"></div>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-10">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                            <i class="fas fa-hospital"></i>
+                        </span>
+                        <span class="text-xs text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full">Full Stack</span>
+                    </div>
+                    <h4 class="text-white font-bold text-lg">Medical Equipment Services</h4>
+                    <p class="text-gray-400 text-sm mt-2 leading-relaxed">
+                        A full-stack platform for managing medical equipment services, bookings, and maintenance tracking.
+                        Built with Next.js, TypeScript, and Tailwind CSS.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">Next.js</span>
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">TypeScript</span>
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">Tailwind</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                            <i class="fas fa-car"></i>
+                        </span>
+                        <span class="text-xs text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full">Frontend</span>
+                    </div>
+                    <h4 class="text-white font-bold text-lg">Car Website Frontend</h4>
+                    <p class="text-gray-400 text-sm mt-2 leading-relaxed">
+                        A modern, responsive frontend for a car dealership website with interactive UI components,
+                        vehicle listings, and a seamless browsing experience.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">React</span>
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">Bootstrap</span>
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">CSS</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                            <i class="fas fa-dumbbell"></i>
+                        </span>
+                        <span class="text-xs text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full">Full Stack</span>
+                    </div>
+                    <h4 class="text-white font-bold text-lg">Gym Management App</h4>
+                    <p class="text-gray-400 text-sm mt-2 leading-relaxed">
+                        A full-stack gym application with member management, class scheduling, and payment tracking.
+                        Built with Next.js, TypeScript, and Tailwind CSS.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">Next.js</span>
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">TypeScript</span>
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">Tailwind</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                            <i class="fas fa-landmark"></i>
+                        </span>
+                        <span class="text-xs text-purple-300 bg-purple-500/10 px-3 py-1 rounded-full">Landing Pages</span>
+                    </div>
+                    <h4 class="text-white font-bold text-lg">Client Landing Pages</h4>
+                    <p class="text-gray-400 text-sm mt-2 leading-relaxed">
+                        Custom-built landing pages for various clients focused on conversion optimization,
+                        brand identity, and responsive design across all devices.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">React</span>
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">Tailwind</span>
+                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-gray-300">Shadcn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== LANGUAGES ====== -->
+    <section class="py-16 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass p-8 md:p-12 rounded-3xl border border-white/5 text-center">
+                <div class="flex items-center justify-center gap-3 mb-3">
+                    <i class="fas fa-globe text-purple-400 text-2xl"></i>
+                    <span class="text-purple-400 text-sm font-semibold tracking-wider">LANGUAGES</span>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🇬🇧</span>
+                        <div class="text-left">
+                            <p class="text-white font-semibold">English</p>
+                            <p class="text-gray-400 text-sm">Professional</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🇸🇦</span>
+                        <div class="text-left">
+                            <p class="text-white font-semibold">Arabic</p>
+                            <p class="text-gray-400 text-sm">Fluent</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🇵🇰</span>
+                        <div class="text-left">
+                            <p class="text-white font-semibold">Urdu</p>
+                            <p class="text-gray-400 text-sm">Native</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== CONTACT ====== -->
+    <section id="contact" class="py-20 px-4 md:px-8 bg-white/[0.02]">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="text-purple-400 text-sm font-semibold tracking-wider">CONTACT</span>
+                <span class="h-px flex-1 bg-gradient-to-r from-purple-500/30 to-transparent"></span>
+            </div>
+            <h2 class="section-title text-white">Let's <span class="gradient-text">Connect</span></h2>
+            <div class="section-underline"></div>
+
+            <div class="grid md:grid-cols-2 gap-10 mt-10">
+                <div>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                    </p>
+                    <div class="mt-6 space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Phone</p>
+                                <p class="text-white font-medium">0326 0414827</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Email</p>
+                                <p class="text-white font-medium break-all">asiframzan7859@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Location</p>
+                                <p class="text-white font-medium">Lahore, Pakistan</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">GitHub</p>
+                                <a href="https://github.com/Asif2021" target="_blank" class="text-white font-medium hover:text-purple-300 transition">
+                                    github.com/Asif2021
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 mt-6">
+                        <a href="https://github.com/Asif2021" target="_blank" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:asiframzan7859@gmail.com" class="social-icon">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="glass p-6 md:p-8 rounded-2xl border border-white/5">
+                    <h4 class="text-white font-bold text-lg mb-4">Send a Message</h4>
+                    <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-4">
+                        <div>
+                            <input type="text" placeholder="Your Name" class="contact-input" required />
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email" class="contact-input" required />
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Subject" class="contact-input" />
+                        </div>
+                        <div>
+                            <textarea rows="4" placeholder="Your Message" class="contact-input resize-none" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#6c63ff] to-[#8b5cf6] text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                    <p id="formStatus" class="text-center text-sm mt-4 text-green-400 hidden"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="py-8 px-4 md:px-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-gray-500 text-sm">
+                &copy; 2026 <span class="text-white font-medium">Asif Ramzan</span>. All rights reserved.
+            </p>
+            <div class="flex items-center gap-4 text-sm text-gray-500">
+                <span>Built with <span class="text-purple-400">❤</span> using Next.js &amp; Tailwind</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script>
+        // Mobile Menu
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('open');
+            document.getElementById('mobileOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('mobileOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMobileMenu();
+        });
+
+        // Form submission handler
+        function handleSubmit(e) {
+            e.preventDefault();
+            const status = document.getElementById('formStatus');
+            status.classList.remove('hidden');
+            status.textContent = '✅ Thanks! Your message has been sent. I\'ll get back to you soon.';
+            status.className = 'text-center text-sm mt-4 text-green-400';
+            document.getElementById('contactForm').reset();
+            setTimeout(() => {
+                status.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Smooth scroll for anchor links (polyfill for older browsers)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-up animations (optional enhancement)
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .glass, .skill-pill').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Reveal elements that are already visible on load
+        setTimeout(() => {
+            document.querySelectorAll('.project-card, .glass, .skill-pill').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }, 300);
+
+        console.log('🚀 Asif Ramzan Portfolio — Built with ❤️');
+    </script>
+
+</body>
+</html>
